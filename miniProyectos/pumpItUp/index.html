@@ -60,7 +60,11 @@
             justify-content: center;
             align-items: center;
             cursor: pointer;
+            user-select: none; /* Previene la selección de texto */
+            -webkit-tap-highlight-color: transparent; /* Elimina el resaltado al tocar en móviles */
         }
+
+        
     </style>
 </head>
 <body>
@@ -170,6 +174,39 @@
         });
 
         startGame();
+
+
+        function checkArrowHit(key) {
+            const arrows = document.querySelectorAll('.arrow');
+            arrows.forEach(arrow => {
+                if (arrow.dataset.key === key && parseInt(arrow.style.top) >= 350) {
+                    gameContainer.removeChild(arrow);
+                    score++;
+                    scoreElement.textContent = `Puntuación: ${score}`;
+                    if (score >= 20) endGame();
+                }
+            });
+        }
+
+        document.addEventListener('keydown', (event) => {
+            const key = event.key.toUpperCase();
+            checkArrowHit(key);
+        });
+
+        buttons.forEach(button => {
+            ['click', 'touchstart'].forEach(eventType => {
+                button.addEventListener(eventType, (e) => {
+                    e.preventDefault(); // Previene el comportamiento por defecto
+                    const key = button.dataset.key;
+                    checkArrowHit(key);
+                }, { passive: false });
+            });
+        });
+
+        startGame();
+
+
+        
     </script>
 </body>
 </html>
