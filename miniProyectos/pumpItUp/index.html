@@ -1,22 +1,25 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pump It Up para ti</title>
     <style>
-        body{
+        body {
             background-image: url(LunaLLena.jpg);
             background-repeat: no-repeat;
             background-size: cover;
-            background-position:top;
+            background-position: top;
         }
-        .container{
+
+        .container {
             display: flex;
             justify-content: center;
 
             margin: 10px auto;
         }
+
         #game-container {
             width: 300px;
             height: 400px;
@@ -26,8 +29,9 @@
 
             display: flex;
             justify-content: center;
-            
+
         }
+
         .arrow {
             width: 50px;
             height: 50px;
@@ -36,49 +40,108 @@
             justify-content: center;
             align-items: center;
         }
+
         .arrow img {
             width: 100%;
             height: 100%;
             object-fit: contain;
         }
+
         #score {
-            font-size: 24px;
+            font-weight: 800;
+            font-size: 35px;
             text-align: center;
-            color: white;
-            font-size: 20px;
+            color: rgb(255, 255, 255);
+            justify-content: center;
         }
+
         #buttons {
             display: flex;
             justify-content: space-around;
-            margin: 5% 20%;
+            margin: 2% auto;
         }
+
         .button {
+            margin: 5px;
+            border-radius: 50%;
             width: 50px;
             height: 50px;
-            background-color: #ddd;
+            background-color: #dddddd43;
             display: flex;
             justify-content: center;
             align-items: center;
             cursor: pointer;
-            user-select: none; /* Previene la selección de texto */
-            -webkit-tap-highlight-color: transparent; /* Elimina el resaltado al tocar en móviles */
+            user-select: none;
+            /* Previene la selección de texto */
+            -webkit-tap-highlight-color: transparent;
+            /* Elimina el resaltado al tocar en móviles */
         }
 
-        
+
+
+
+
+        .imagenFinal {
+            display: none;
+            position: fixed;
+            width: 100%;
+            height: 100vh;
+            margin: 0 auto;
+
+            justify-content: center;
+            align-items: center;
+
+            background-color: rgba(0, 0, 0, 0.581);
+
+            z-index: 1000;
+        }
+
+        .imagenFinal img {
+
+            width: 30%;
+            margin: 0 auto;
+
+            justify-content: center;
+            align-items: center;
+            display: flex;
+        }
+
+        h1 {
+            color: white;
+            font-family: cursive;
+        }
+
+        .container_2 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
     </style>
 </head>
+
 <body>
-    <div id="score">Puntuación: 0</div>
+    <div class="imagenFinal" id="imagenFinal">
+
+        <div class="container_2">
+
+            <h1>GRACIAS POR JUGAR, VAMOS A JUGAR OVERWATCH ♥ </h2>
+
+        </div>
+        <img src="mascara.png" alt="">
+    </div>
 
     <div class="container">
         <div id="game-container"></div>
     </div>
-    
+    <div id="score">Puntuación: 0</div>
+
+
     <div id="buttons">
         <div class="button" data-key="Q">7
             <img style="width: 30px;" src="7_verde.png" alt="">
         </div>
-        <div  class="button" data-key="W">9
+        <div class="button" data-key="W">9
             <img style="width: 30px;" src="9_azul.png" alt="">
         </div>
         <div class="button" data-key="E">5
@@ -91,6 +154,8 @@
             <img style="width: 30px;" src="3_amarillo.png" alt="">
         </div>
     </div>
+
+    
 
     <script>
         const gameContainer = document.getElementById('game-container');
@@ -142,7 +207,13 @@
 
         function endGame() {
             clearInterval(arrowInterval);
-            alert(`¡Juego terminado!, Lo hice para ti, espero algún dia volverte a ver <3 , Tu puntuación final es: ${score}`);
+           // alert(`¡Juego terminado!, Si te gusto escríbeme, lo hice para ti, Tu puntuación final es: ${score}`);
+
+           const imagenFinal = document.getElementById("imagenFinal");
+
+            imagenFinal.setAttribute("style", "display: flex");
+
+
         }
 
         document.addEventListener('keydown', (event) => {
@@ -206,7 +277,8 @@
         startGame();
 
 
-        
+
     </script>
 </body>
+
 </html>
