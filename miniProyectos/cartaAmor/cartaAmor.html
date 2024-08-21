@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cartas de Amor</title>
+
+</head>
+
+<body>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f95f;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: block;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 100px auto;
+            text-align: center;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            overflow: hidden;
+            z-index: 1000;
+            left: 50%; 
+            transform: translateX(-50%); /* Centra el contenedor horizontalmente */
+        }
+
+        .card {
+            display: none;
+            margin: 20px auto; /* Cambiado para centrar las cartas */
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f0f8ff;
+            position: relative;
+            width: 90%;
+            transition: transform 0.5s ease, opacity 0.5s ease;
+            max-height: none;
+            overflow-y: visible;
+        }
+
+        .buttons {
+            margin: 20px 0;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007BFF;
+            color: white;
+            cursor: pointer;
+        }
+
+
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #startScreen {
+            display: block;
+        }
+
+        #cardScreen {
+            display: none;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+        .corazones img {
+            width: 70px;
+        }
+
+
+        .fondo {
+            display: flex;
+            position: absolute; /* Cambiado a 'absolute' */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            justify-content: center;
+            align-items: center;
+            z-index: 1; /* Asegúrate de que sea un valor bajo */
+        }
+
+        .corazon {
+            opacity: 0.4;
+            background-color: transparent;
+            display: inline-block;
+            position: relative;
+            text-align: center;
+            padding: 20px;
+            /* Ancho del contenedor */
+            margin-right: 10px;
+            /* Espacio entre contenedores */
+            animation: desplazar 10s linear infinite;
+            filter: drop-shadow(5px 0px 5px rgba(0, 0, 0, 0.8));
+
+        }
+
+        .corazon:nth-child(even) {
+            width: 125px;
+            transform: rotate(-100deg);
+            top: 200px;
+        }
+
+        .corazon:nth-child(odd) {
+            transform: rotate(100deg);
+        }
+
+        .corazon:nth-child(3n-1) {
+            width: 50px;
+            top: 100px;
+
+        }
+
+        @keyframes desplazar {
+            from {
+                transform: translateY(0%), rotate(100deg);
+            }
+
+            to {
+                transform: translateY(500%);
+
+            }
+        }
+
+
+        @media only screen and (max-width: 800px) {
+            .corazon img {
+                width: 30px;
+            }
+
+        }
+    </style>
+
+    
+    <div class="fondo" id="fondo">
+
+        <div class="corazones">
+            <img class="corazon" src="hello-kitty.png" alt="">
+            <img class="corazon" src="corazon.png" alt="">
+            <img class="corazon" src="corazon.png" alt="">
+            <img class="corazon" src="corazon.png" alt="">
+            <img class="corazon" src="corazon.png" alt="">
+            <img class="corazon" src="corazon.png" alt="">
+            <img class="corazon" src="corazon.png" alt="">
+            <img class="corazon" src="hello-kitty.png" alt="">
+            <img class="corazon" src="corazon.png" alt="">
+            <img class="corazon" src="corazon.png" alt="">
+            <img class="corazon" src="corazon.png" alt="">
+            <img class="corazon" src="hello-kitty.png" alt="">
+            <img class="corazon" src="corazon.png" alt="">
+            <img class="corazon" src="corazon.png" alt="">
+            <img class="corazon" src="hello-kitty.png" alt="">
+            <img class="corazon" src="corazon.png" alt="">
+            <img class="corazon" src="corazon.png" alt="">
+            <img class="corazon" src="corazon.png" alt="">
+            <img class="corazon" src="hello-kitty.png" alt="">
+            <img class="corazon" src="corazon.png" alt="">
+            <img class="corazon" src="corazon.png" alt="">
+            <img class="corazon" src="corazon.png" alt="">
+            <img class="corazon" src="corazon.png" alt="">
+            <img class="corazon" src="corazon.png" alt="">
+            <img class="corazon" src="hello-kitty.png" alt="">
+            <img class="corazon" src="corazon.png" alt="">
+            <img class="corazon" src="corazon.png" alt="">
+            <img class="corazon" src="corazon.png" alt="">
+            <img class="corazon" src="corazon.png" alt="">
+
+
+
+
+
+        </div>
+
+    </div>
+
+
+    <div class="container">
+        <div id="startScreen">
+            <h1>Cartas de Amor</h1>
+            <p>Descubre mis sentimientos a través de estas cartas.</p>
+            <button id="startBtn" onclick="start()">Iniciar</button>
+        </div>
+
+        <div id="cardScreen">
+            <h2 id="cardTitle"></h2>
+            <div id="cardContent" class="card"></div>
+            <div class="buttons">
+                <button id="prevBtn" onclick="showPrevCard()">Atrás</button>
+                <button id="nextBtn" onclick="showNextCard()">Siguiente</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const cartas = [
+            {
+                title: "Carta 1",
+                content: "Cuando compartimos nuestras fotos del pasado, fue como si pudiéramos observar a través de una ventana hacia el futuro, contemplando a nuestras versiones adultas mirando nostálgicamente hacia los orígenes de nuestra historia compartida."
+            },
+            {
+                title: "Carta 2",
+                content: "Era como si estuviéramos presenciando la película de nuestras vidas, con escenas de nuestros yo más jóvenes entrelazándose en una cinta antigua y desgastada por el paso del tiempo. Sin embargo, en esas imágenes podía vislumbrar la chispa de una conexión que trascendía las barreras de la edad y las etapas de la vida."
+            },
+            {
+                title: "Carta 3",
+                content: "Cada sonrisa, cada gesto familiar, era una pista que alimentaba mi convicción de que nuestros caminos ya se habían cruzado en algún momento del pasado. Y al ver esos rostros tan familiares, sentía que estaba a punto de recordar algo que había estado oculto en lo más profundo de mi ser."
+            },
+            {
+                title: "Carta 4",
+                content: "Déjame ser el narrador de esa película que aún no hemos terminado de ver, el custodio de esos recuerdos que aguardan por ser despertados. Juntos, recorreremos cada fotograma de nuestra historia, explorando ese vínculo que nos une más allá de lo que nuestros ojos pueden percibir en el presente."
+            },
+            {
+                title: "Carta 5",
+                content: "Porque sé que esta conexión que siento contigo va más allá de lo efímero. Es una sintonía de almas que se han encontrado a través del tiempo, y que ahora han vuelto a cruzar sus caminos para tejer una trama aún más hermosa y profunda."
+            }
+        ];
+
+        let currentCardIndex = 0;
+
+        function start() {
+            document.getElementById('startScreen').style.display = 'none';
+            document.getElementById('cardScreen').style.display = 'block';
+            currentCardIndex = 0;
+            showCard(currentCardIndex);
+        }
+
+        function showCard(index) {
+            const cardElement = document.getElementById('cardContent');
+            const titleElement = document.getElementById('cardTitle');
+            titleElement.innerText = cartas[index].title;
+            cardElement.innerText = cartas[index].content;
+            cardElement.style.display = 'block';
+            cardElement.style.opacity = 1;
+            cardElement.style.transform = 'translateX(0)';
+
+            document.getElementById('prevBtn').style.display = index === 0 ? 'none' : 'inline-block';
+            document.getElementById('nextBtn').style.display = index === cartas.length - 1 ? 'none' : 'inline-block';
+        }
+
+        function showNextCard() {
+            if (currentCardIndex < cartas.length - 1) {
+                const cardElement = document.getElementById('cardContent');
+                cardElement.style.opacity = 0;
+                cardElement.style.transform = 'translateX(-100%)';
+
+                setTimeout(() => {
+                    currentCardIndex++;
+                    showCard(currentCardIndex);
+                }, 500);
+            }
+        }
+
+        function showPrevCard() {
+            if (currentCardIndex > 0) {
+                const cardElement = document.getElementById('cardContent');
+                cardElement.style.opacity = 0;
+                cardElement.style.transform = 'translateX(100%)';
+
+                setTimeout(() => {
+                    currentCardIndex--;
+                    showCard(currentCardIndex);
+                }, 500);
+            }
+        }
+    </script>
+</body>
+
+</html>
